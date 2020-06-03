@@ -224,8 +224,6 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
     View playerView = getCurrentActivity().findViewById(tag);
 
     if (playerView instanceof BitmovinPlayerView) {
-      SubtitleTrack subtitles = new SubtitleTrack(url);
-
       SubtitleTrack[] availableSubtitles = ((BitmovinPlayerView) playerView).getPlayer().getAvailableSubtitles();
       promise.resolve(availableSubtitles);
     } else {
