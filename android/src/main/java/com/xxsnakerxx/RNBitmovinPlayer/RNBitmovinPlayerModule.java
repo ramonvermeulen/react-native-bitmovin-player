@@ -212,8 +212,8 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
     if (playerView instanceof BitmovinPlayerView) {
       SubtitleTrack subtitles = new SubtitleTrack(url);
 
-      ((BitmovinPlayerView) playerView).addSubtitle(subtitles);
-      promise.resolve();
+      ((BitmovinPlayerView) playerView).getPlayer().addSubtitle(subtitles);
+      promise.resolve(true);
     } else {
       throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
     }
