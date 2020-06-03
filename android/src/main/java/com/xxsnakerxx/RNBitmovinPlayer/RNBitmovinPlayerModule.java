@@ -4,6 +4,7 @@ package com.xxsnakerxx.RNBitmovinPlayer;
 import android.view.View;
 
 import com.bitmovin.player.BitmovinPlayerView;
+import com.bitmovin.player.config.track.SubtitleTrack;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -201,6 +202,20 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
       promise.resolve(isPlaying);
     } else {
       throw new ClassCastException(String.format("Cannot isPlaying: view with tag #%d is not a RNBitmovinPlayer", tag));
+    }
+  }
+
+  @ReactMethod
+  public void setSubtitles(int tag, String url, Promise promise) {
+    View playerView = getCurrentActivity().findViewById(tag);
+
+    if (playerView instanceof BitmovinPlayerView) {
+      SubtitleTrack subtitles = new SubtitleTrack(url);
+
+      ((BitmovinPlayerView) playerView).addSubtitle(subtitles);
+      promise.resolve();
+    } else {
+      throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
     }
   }
 }

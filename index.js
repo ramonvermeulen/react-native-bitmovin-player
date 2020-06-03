@@ -158,6 +158,8 @@ class BitmovinPlayer extends React.Component {
     RNBitmovinPlayerModule.setVolume(findNodeHandle(this._player), volume);
   }
 
+  setSubtitles = (subtitleUrl) => RNBitmovinPlayerModule.setSubtitles(findNodeHandle(this._player), subtitleUrl);
+
   isMuted = () => RNBitmovinPlayerModule.isMuted(findNodeHandle(this._player))
 
   isPaused = () => RNBitmovinPlayerModule.isPaused(findNodeHandle(this._player))
