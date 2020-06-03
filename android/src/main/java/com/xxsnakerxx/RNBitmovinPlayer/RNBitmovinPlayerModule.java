@@ -206,28 +206,23 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setSubtitles(int tag, String url, Promise promise) {
-    View playerView = getCurrentActivity().findViewById(tag);
-
-    if (playerView instanceof BitmovinPlayerView) {
-      SubtitleTrack subtitles = new SubtitleTrack(url);
-
-      ((BitmovinPlayerView) playerView).getPlayer().addSubtitle(subtitles);
-      promise.resolve(true);
-    } else {
-      throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
-    }
-  }
-
-  @ReactMethod
-  public void getAvailableSubtitles(int tag, Promise promise) {
+  public void setSubtitles(int tag, String lang, Promise promise) {
     View playerView = getCurrentActivity().findViewById(tag);
 
     if (playerView instanceof BitmovinPlayerView) {
       SubtitleTrack[] availableSubtitles = ((BitmovinPlayerView) playerView).getPlayer().getAvailableSubtitles();
-      promise.resolve(availableSubtitles);
+      for (SubtitleTrack sub : availableSubtitles) {
+        String subLang = sub.getLanguage();
+        String id = sub.getId();
+        if (subLang instanceof String && id instanceof String && subLang == lang) {
+          ((BitmovinPlayerView) playerView).getPlayer().setSubtitle(id);
+          promise.resolve(true);
+        }
+      }
+      promise.reject(String.format("Could not find subtitle for language %s for the current resource", lang));
     } else {
-      throw new ClassCastException(String.format("Cannot getAvailableSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
+      throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
     }
   }
+  
 }
