@@ -148,11 +148,13 @@ class BitmovinPlayer extends React.Component {
     RNBitmovinPlayerModule.exitFullscreen(findNodeHandle(this._player));
   }
 
-  getCurrentTime = () => RNBitmovinPlayerModule.getCurrentTime(findNodeHandle(this._player))
+  getCurrentTime = () => RNBitmovinPlayerModule.getCurrentTime(findNodeHandle(this._player));
 
-  getDuration = () => RNBitmovinPlayerModule.getDuration(findNodeHandle(this._player))
+  getDuration = () => RNBitmovinPlayerModule.getDuration(findNodeHandle(this._player));
 
-  getVolume = () => RNBitmovinPlayerModule.getVolume(findNodeHandle(this._player))
+  getVolume = () => RNBitmovinPlayerModule.getVolume(findNodeHandle(this._player));
+
+  getAvailableSubtitles = () => RNBitmovinPlayerModule.getAvailableSubtitles(findNodeHandle(this._player));
 
   setVolume = (volume = 100) => {
     RNBitmovinPlayerModule.setVolume(findNodeHandle(this._player), volume);
@@ -160,13 +162,13 @@ class BitmovinPlayer extends React.Component {
 
   setSubtitles = (subtitleUrl) => RNBitmovinPlayerModule.setSubtitles(findNodeHandle(this._player), subtitleUrl);
 
-  isMuted = () => RNBitmovinPlayerModule.isMuted(findNodeHandle(this._player))
+  isMuted = () => RNBitmovinPlayerModule.isMuted(findNodeHandle(this._player));
 
-  isPaused = () => RNBitmovinPlayerModule.isPaused(findNodeHandle(this._player))
+  isPaused = () => RNBitmovinPlayerModule.isPaused(findNodeHandle(this._player));
 
-  isStalled = () => RNBitmovinPlayerModule.isStalled(findNodeHandle(this._player))
+  isStalled = () => RNBitmovinPlayerModule.isStalled(findNodeHandle(this._player));
 
-  isPlaying = () => RNBitmovinPlayerModule.isPlaying(findNodeHandle(this._player))
+  isPlaying = () => RNBitmovinPlayerModule.isPlaying(findNodeHandle(this._player));
 
   _setRef = (ref) => { this._player = ref; }
 

@@ -218,4 +218,18 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
       throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
     }
   }
+
+  @ReactMethod
+  public void getAvailableSubtitles(int tag, Promise promise) {
+    View playerView = getCurrentActivity().findViewById(tag);
+
+    if (playerView instanceof BitmovinPlayerView) {
+      SubtitleTrack subtitles = new SubtitleTrack(url);
+
+      SubtitleTrack[] availableSubtitles = ((BitmovinPlayerView) playerView).getPlayer().getAvailableSubtitles();
+      promise.resolve(availableSubtitles);
+    } else {
+      throw new ClassCastException(String.format("Cannot getAvailableSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
+    }
+  }
 }
