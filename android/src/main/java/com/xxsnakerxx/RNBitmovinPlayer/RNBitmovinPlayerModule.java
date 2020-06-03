@@ -214,7 +214,7 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
       for (SubtitleTrack sub : availableSubtitles) {
         String subLang = sub.getLanguage();
         String id = sub.getId();
-        if (subLang instanceof String && id instanceof String && subLang == lang) {
+        if (subLang instanceof String && lang instanceof String && subLang.equals(lang)) {
           ((BitmovinPlayerView) playerView).getPlayer().setSubtitle(id);
           promise.resolve(true);
         }
@@ -224,5 +224,5 @@ public class RNBitmovinPlayerModule extends ReactContextBaseJavaModule {
       throw new ClassCastException(String.format("Cannot setSubtitles: view with tag #%d is not a RNBitmovinPlayer", tag));
     }
   }
-  
+
 }
